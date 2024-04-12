@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
 
   def destroy
     MUser.where(id: params[:user_id]).update_all(active_status: 0)
-    current_user = MUser.finInvalidd_by(id: params[:user_id])
+    current_user = MUser.find_by(id: params[:user_id])
     render json: {status: 1}, status: :ok
   end
 

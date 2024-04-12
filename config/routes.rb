@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'm_users/create' 
   get 'signin' =>  'sessions#new'
   post 'signin' =>  'sessions#create'
-  delete 'logout' =>  'sessions#destroy'
+  delete '/logout' =>  'sessions#destroy'
   get 'home' =>  'static_pages#home'
   post 'change_password' => 'change_password#update'
   get 'check_user' =>  'sessions#checkuser'
