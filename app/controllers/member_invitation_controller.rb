@@ -16,20 +16,20 @@ class MemberInvitationController < ApplicationController
       # already_member_status = true 
       # flash[:danger] = "Email is already member."
       # redirect_to memberinvite_url
-      error = 'Email is already member'
+      error = 'メールはすでに会員です。'
       
     else
       if params[:channelid].nil? || params[:channelid] == ""
         # is_channelid_blank = true
         # flash[:danger] = "Please Select Channel."
         # redirect_to memberinvite_url
-        error = 'Please Select Channel.'
+        error = 'チャンネルを選択してください。'
         
       elsif params[:email].nil? || params[:email] == ""
         # is_email_blank = true 
         # flash[:danger] = "Please Enter Email."
         # redirect_to memberinvite_url
-        error = 'Please Enter Email.'
+        error = 'メールを入力してください。'
         
       else
         @i_user = MUser.new

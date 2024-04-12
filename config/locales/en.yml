@@ -48,5 +48,6 @@ en:
               blank: "を入力してください。"
             email:
               blank: "を入力してください。"
+              invalid: "メールアドレスが無効です。"
             password:
               blank: "を入力してください。"

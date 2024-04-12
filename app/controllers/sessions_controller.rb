@@ -31,27 +31,27 @@ class SessionsController < ApplicationController
             member_status = true
           else
             deactivate_message = true
-            errors = "Account Deactivate. Please contact admin."
+            errors = "アカウントを無効化します。 管理者に連絡してください。"
           end
         else
           invalid_message = true
-          errors = "Invalid name/password combination"
+          errors = "名前とパスワードの組み合わせが無効です。"
         end
         render json: {  token:, errors:, user_workspace: t_user_workspace, member_status: , deactivate_message: , invalid_message: }, status: :ok
     else
-      errors = "Invalid name/password combination"
+      errors = "名前とパスワードの組み合わせが無効です。"
       render json: { errors: }
-      # render_unauthorized(CONSTANTS::ERR_LOGIN_FAILED)
+      # render_unauthorized(CONSTANTS::ERR_LOGIN_FAILED)。
     end
   else
-    errors = "Invalid name/password combination"
+    errors = "名前とパスワードの組み合わせが無効です。"
     render json: { errors: }
   end
   end
 
   def destroy
     MUser.where(id: params[:user_id]).update_all(active_status: 0)
-    current_user = MUser.find_by(id: params[:user_id])
+    current_user = MUser.finInvalidd_by(id: params[:user_id])
     render json: {status: 1}, status: :ok
   end
 
