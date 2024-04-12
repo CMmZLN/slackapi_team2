@@ -35,7 +35,7 @@ en:
         profile_image: "チャンネル名"
         name: "名称"
         email: "メール"
-        password: "パスワード
+        password: "パスワード"
     errors:
       models:
         m_user:
