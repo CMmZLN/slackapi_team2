@@ -28,4 +28,25 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      m_user:
+        remember_digest: "ワークスペース名"
+        profile_image: "チャンネル名"
+        name: "名称"
+        email: "メール"
+        password: "パスワード
+    errors:
+      models:
+        m_user:
+          attributes:
+            remember_digest:
+              blank: "を入力してください。"
+            profile_image:
+              blank: "を入力してください。"
+            name:
+              blank: "を入力してください。"
+            email:
+              blank: "を入力してください。"
+            password:
+              blank: "を入力してください。"
