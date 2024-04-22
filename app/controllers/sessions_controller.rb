@@ -35,16 +35,16 @@ class SessionsController < ApplicationController
           end
         else
           invalid_message = true
-          errors = "名前とパスワードの組み合わせが無効です。"
+          errors = "名前とパスワードが間違っている。"
         end
         render json: {  token:, errors:, user_workspace: t_user_workspace, member_status: , deactivate_message: , invalid_message: }, status: :ok
     else
-      errors = "名前とパスワードの組み合わせが無効です。"
+      errors = "名前とパスワードが間違っている。"
       render json: { errors: }
       # render_unauthorized(CONSTANTS::ERR_LOGIN_FAILED)。
     end
   else
-    errors = "名前とパスワードの組み合わせが無効です。"
+    errors = "名前とパスワードが間違っている。"
     render json: { errors: }
   end
   end
