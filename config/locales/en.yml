@@ -46,7 +46,7 @@ en:
               blank: "を入力してください。"
             name:
               blank: "を入力してください。"
-              uniqueness: "はすでに登録されています。"
+              # uniqueness: "はすでに登録されています。"
             email:
               blank: "を入力してください。"
               invalid: "メールアドレスが無効です。"

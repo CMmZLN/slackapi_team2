@@ -19,15 +19,15 @@ class ChangePasswordController < ApplicationController
 
     if password == "" || password.nil?
       # is_password_blank = true 
-      error = "パスワードを入力してください!"
+      error = "パスワードを入力してください。"
 
     elsif password_confirmation == "" || password_confirmation.nil?
       # is_password_confirmation_blank = true
-      error = "パスワード確認を入力してください。!"
+      error = "パスワード確認を入力してください。"
 
     elsif password != password_confirmation
       # password_equal_status = true
-      error = "パスワードとパスワード確認は同じである必要があります!"
+      error = "パスワードとパスワード確認が一致していません。"
   
     else 
       MUser.where(id: params[:user_id]).update_all(password_digest: @m_user.password_digest)
