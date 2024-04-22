@@ -26,7 +26,6 @@
 #     en:
 #       "yes": yup
 #       enabled: "ON"
-
 en:
   activerecord:
     attributes:
@@ -36,6 +35,7 @@ en:
         name: "名称"
         email: "メール"
         password: "パスワード"
+        password_confirmation: "パスワード確認"
     errors:
       models:
         m_user:
@@ -46,8 +46,14 @@ en:
               blank: "を入力してください。"
             name:
               blank: "を入力してください。"
+              uniqueness: "はすでに登録されています。"
             email:
               blank: "を入力してください。"
               invalid: "メールアドレスが無効です。"
             password:
               blank: "を入力してください。"
+              too_short:
+                # one: "が短すぎます。 (最低 1 文字)"
+                other: "が短すぎます。 (最小文字数は %{count} 文字です。)"
+            password_confirmation:
+              confirmation: "がパスワードと一致しません。"
