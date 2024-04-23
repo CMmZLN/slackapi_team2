@@ -95,6 +95,8 @@ Rails.application.routes.draw do
     get 'refresh_direct' => 'm_users#refresh_direct'
     get 'refresh_group' => 'm_channels#refresh_group'
 
+    get 'refresh' => 'sessions#refresh'
+
   
   # Defines the root path route ("/")
   # root "posts#index"

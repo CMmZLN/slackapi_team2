@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    MUser.where(id: params[:user_id]).update_all(active_status: 0)
+    MUser.where(id: params[:user_id]).update_all(active_status: false)
     current_user = MUser.find_by(id: params[:user_id])
     render json: {status: 1}, status: :ok
   end
@@ -59,5 +59,13 @@ class SessionsController < ApplicationController
     user = MUser.find_by(id: params[:user_id], member_status: 1)
     render json: {user:}, status: :ok
   end
+
+  def refresh
+    unless params[:user_id].nil?
+      @user = MUser.find_by(id: params[:user_id])
+      MUser.where(id: params[:user_id]).update_all(active_status: true, updated_at: Time.new)
+      render json: {successStatus: 1}, status: :ok
+    end
+end
 
 end
