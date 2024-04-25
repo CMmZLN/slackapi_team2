@@ -46,7 +46,9 @@ class ApplicationController < ActionController::API
 
   def retrieve_direct_thread
     @s_user = MUser.find_by(id: params[:s_user_id])
-        
+
+    logger.info("TDirectMessageID")
+    logger.info(params[:t_direct_message_id])
     @t_direct_message = TDirectMessage.find_by(id: params[:t_direct_message_id])
     @send_user = MUser.find_by(id: @t_direct_message.send_user_id)
 
