@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
       @t_direct_message_dates = TDirectMessage.select("distinct DATE(created_at) as created_date")
                                               .where("(t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? ) 
                                               or (t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? )", 
-                                              params[:user_id],  params[:id],  params[:id], params[:user_id])
+                                              params[:user_id],  params[:id],  params[:id], params[:user_id]).order(created_date: :asc)
       
       @t_direct_message_datesize = Array.new
       @t_direct_messages.each{|d| @t_direct_message_datesize.push(d.created_at.strftime("%F").to_s)}
