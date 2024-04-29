@@ -95,7 +95,7 @@ class ApplicationController < ActionController::API
     @t_group_star_msgids = Array.new
     @temp_group_star_msgids.each { |r| @t_group_star_msgids.push(r.groupmsgid) }
     @u_count = TUserChannel.where(channelid: params[:id]).count
-    @t_group_message_dates = TGroupMessage.select("distinct DATE(created_at) as created_date").where("m_channel_id = ? ", params[:id])
+    @t_group_message_dates = TGroupMessage.select("distinct DATE(created_at) as created_date").where("m_channel_id = ? ", params[:id]).order(created_date: :asc)
     
     @t_group_message_datesize = Array.new
     @t_group_messages.each{|d| @t_group_message_datesize.push(d.created_at.strftime("%F").to_s)}
