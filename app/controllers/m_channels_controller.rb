@@ -59,7 +59,7 @@ class MChannelsController < ApplicationController
       status = true;
       render json: status
     else
-      render json: @channel.errors, status: :unprocessable_entity
+      render json: status
     end
   end
 
