@@ -309,7 +309,7 @@ class ApplicationController < ActionController::API
     TUserChannel.where(channelid: params[:s_channel_id], userid: params[:user_id]).update_all(message_count: 0, unread_channel_message: nil)
     @t_group_message = TGroupMessage.find_by(id: params[:s_group_message_id])
     @send_user = MUser.find_by(id: @t_group_message.m_user_id)
-    @t_group_threads = TGroupThread.select("m_user_id,name, groupthreadmsg, t_group_threads.id as id, t_group_threads.created_at  as created_at")
+    @t_group_threads = TGroupThread.select("t_group_threads.m_user_id,name, groupthreadmsg, t_group_threads.id as id, t_group_threads.created_at  as created_at")
                     .joins("INNER JOIN t_group_messages ON t_group_messages.id = t_group_threads.t_group_message_id
                           INNER JOIN m_users ON m_users.id = t_group_threads.m_user_id").where("t_group_threads.t_group_message_id = ?", params[:s_group_message_id]).order(id: :asc)
     @temp_group_star_thread_msgids = TGroupStarThread.select("groupthreadid").where("userid = ?", params[:user_id])
