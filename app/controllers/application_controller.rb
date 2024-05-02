@@ -223,7 +223,7 @@ class ApplicationController < ActionController::API
         "(t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? ) or (t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? )", params[:user_id],  params[:id],  params[:id], params[:user_id]
       ).where.not(m_user_id: params[:user_id], read_status: true).update_all(read_status: true)
       @s_user = MUser.find_by(id: params[:id])
-      @t_direct_messages = TDirectMessage.select("name, directmsg, t_direct_messages.id as id, t_direct_messages.created_at  as created_at,
+      @t_direct_messages = TDirectMessage.select("send_user_id,name, directmsg, t_direct_messages.id as id, t_direct_messages.created_at  as created_at,
                                             (select count(*) from t_direct_threads where t_direct_threads.t_direct_message_id = t_direct_messages.id) as count")
                                           .joins("INNER JOIN m_users ON m_users.id = t_direct_messages.send_user_id")
                                           .where("(t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? )
@@ -254,7 +254,7 @@ class ApplicationController < ActionController::API
     @t_direct_message = TDirectMessage.find_by(id: params[:t_direct_message_id])
     @send_user = MUser.find_by(id: @t_direct_message.send_user_id)
     TDirectThread.where.not(m_user_id: params[:user_id], read_status: 1).update_all(read_status: 1)
-    @t_direct_threads = TDirectThread.select("name, directthreadmsg, t_direct_threads.id as id, t_direct_threads.created_at  as created_at")
+    @t_direct_threads = TDirectThread.select("m_user_id,name, directthreadmsg, t_direct_threads.id as id, t_direct_threads.created_at  as created_at")
                 .joins("INNER JOIN t_direct_messages ON t_direct_messages.id = t_direct_threads.t_direct_message_id
                         INNER JOIN m_users ON m_users.id = t_direct_threads.m_user_id")
                 .where("t_direct_threads.t_direct_message_id = ?", params[:t_direct_message_id]).order(id: :asc)
@@ -277,7 +277,7 @@ class ApplicationController < ActionController::API
                                 .where("m_users.member_status = true and m_channels.m_workspace_id = ? and m_channels.id = ?",
                                 params[:workspace_id], params[:id])
     TUserChannel.where(channelid: params[:id], userid: params[:user_id]).update_all(message_count: 0, unread_channel_message: nil)
-    @t_group_messages = TGroupMessage.select("name, groupmsg, t_group_messages.id as id, t_group_messages.created_at as created_at,
+    @t_group_messages = TGroupMessage.select("m_user_id,name, groupmsg, t_group_messages.id as id, t_group_messages.created_at as created_at,
                                             (select count(*) from t_group_threads where t_group_threads.t_group_message_id = t_group_messages.id) as count ")
                                       .joins("INNER JOIN m_users ON m_users.id = t_group_messages.m_user_id")
                                       .where("m_channel_id = ? ", params[:id]).order(created_at: :desc).limit(params[:r_group_size])
@@ -309,7 +309,7 @@ class ApplicationController < ActionController::API
     TUserChannel.where(channelid: params[:s_channel_id], userid: params[:user_id]).update_all(message_count: 0, unread_channel_message: nil)
     @t_group_message = TGroupMessage.find_by(id: params[:s_group_message_id])
     @send_user = MUser.find_by(id: @t_group_message.m_user_id)
-    @t_group_threads = TGroupThread.select("name, groupthreadmsg, t_group_threads.id as id, t_group_threads.created_at  as created_at")
+    @t_group_threads = TGroupThread.select("m_user_id,name, groupthreadmsg, t_group_threads.id as id, t_group_threads.created_at  as created_at")
                     .joins("INNER JOIN t_group_messages ON t_group_messages.id = t_group_threads.t_group_message_id
                           INNER JOIN m_users ON m_users.id = t_group_threads.m_user_id").where("t_group_threads.t_group_message_id = ?", params[:s_group_message_id]).order(id: :asc)
     @temp_group_star_thread_msgids = TGroupStarThread.select("groupthreadid").where("userid = ?", params[:user_id])
