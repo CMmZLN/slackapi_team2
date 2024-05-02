@@ -84,7 +84,7 @@ class ApplicationController < ActionController::API
 
     TUserChannel.where(channelid: params[:id], userid: params[:user_id]).update_all(message_count: 0, unread_channel_message: nil)
 
-    @t_group_messages = TGroupMessage.select("name, groupmsg, t_group_messages.id as id, t_group_messages.created_at as created_at,t_group_messages.
+    @t_group_messages = TGroupMessage.select("name, groupmsg, t_group_messages.id as id, t_group_messages.created_at as created_at, 
                                             (select count(*) from t_group_threads where t_group_threads.t_group_message_id = t_group_messages.id) as count ")
                                       .joins("INNER JOIN m_users ON m_users.id = t_group_messages.m_user_id")
                                       .where("m_channel_id = ? ", params[:id]).order(created_at: :desc).limit(params[:r_group_size])
