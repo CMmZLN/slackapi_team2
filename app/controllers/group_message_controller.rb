@@ -145,7 +145,7 @@ def deletemsg
     end
 
     MUser.joins("INNER JOIN t_user_channels ON t_user_channels.userid = m_users.id")
-          .where("t_user_channels.id =  ?", params[:s_channel_id])
+          .where("t_user_channels.channelid =  ?", params[:s_channel_id])
           .where.not("m_users.id = ?", params[:user_id]).update_all(remember_digest: "1")
 
     @m_channel_users = MUser.joins("INNER JOIN t_user_channels on t_user_channels.userid = m_users.id 
