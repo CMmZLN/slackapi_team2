@@ -96,6 +96,10 @@ def deletemsg
   
 
   def showthread         
+    Rails.logger.info('params[:s_group_message_id]????????????????????')
+    Rails.logger.info(params[:s_group_message_id])
+    Rails.logger.info('params[:s_channel_id]????????????????????')
+    Rails.logger.info(params[:s_channel_id])
     @t_group_thread = TGroupThread.new
     @t_group_thread.groupthreadmsg = params[:threadmsg]
     @t_group_thread.t_group_message_id = params[:s_group_message_id]
@@ -130,12 +134,12 @@ def deletemsg
                 temp_msgid += u_message
                 temp_msgid += ","
               end
-
-            u_channel.unread_channel_message = temp_msgid
+            # u_channel.unread_channel_message = temp_msgid
           end
         end
-
-        temp_msgid += params[:s_group_message_id].to_s 
+        temp_msgid += params[:s_group_message_id].id.to_s
+        u_channel.unread_channel_message = temp_msgid
+        # temp_msgid += params[:s_group_message_id].to_s 
         TUserChannel.where(id: u_channel.id).update_all(message_count: u_channel.message_count, unread_channel_message: u_channel.unread_channel_message )
       end
     end

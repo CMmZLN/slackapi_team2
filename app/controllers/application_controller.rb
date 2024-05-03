@@ -253,7 +253,7 @@ class ApplicationController < ActionController::API
     @s_user = MUser.find_by(id: params[:s_user_id])
     @t_direct_message = TDirectMessage.find_by(id: params[:t_direct_message_id])
     @send_user = MUser.find_by(id: @t_direct_message.send_user_id)
-    TDirectThread.where.not(m_user_id: params[:user_id], read_status: 1).update_all(read_status: 1)
+    # TDirectThread.where.not(m_user_id: params[:user_id], read_status: 1).update_all(read_status: 1)
     @t_direct_threads = TDirectThread.select("m_user_id,name, directthreadmsg, t_direct_threads.id as id, t_direct_threads.created_at  as created_at")
                 .joins("INNER JOIN t_direct_messages ON t_direct_messages.id = t_direct_threads.t_direct_message_id
                         INNER JOIN m_users ON m_users.id = t_direct_threads.m_user_id")
