@@ -27,7 +27,7 @@ class AllUnreadController < ApplicationController
     end
     @t_user_channelids = @tmp_user_channelids.flatten
 
-    @t_group_messages = TGroupMessage.select("t_group_messages.id,t_group_messages.groupmsg,t_group_messages.created_at,m_users.name,m_channels.channel_name, (select count(*) from t_group_threads where t_group_threads.t_group_message_id = t_group_messages.id) as count, m_channels.channel_name")
+    @t_group_messages = TGroupMessage.select("t_group_messages.id,t_group_messages.m_channel_id,t_group_messages.groupmsg,t_group_messages.created_at,m_users.name,m_channels.channel_name, (select count(*) from t_group_threads where t_group_threads.t_group_message_id = t_group_messages.id) as count, m_channels.channel_name")
     .joins("INNER JOIN m_users ON m_users.id = t_group_messages.m_user_id
     INNER JOIN m_channels ON t_group_messages.m_channel_id=m_channels.id")
 
