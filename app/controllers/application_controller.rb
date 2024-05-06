@@ -348,7 +348,7 @@ class ApplicationController < ActionController::API
                                     .where("t_direct_threads.read_status = false and t_direct_threads.m_user_id = ? and
                                     ((t_direct_messages.send_user_id = ? and t_direct_messages.receive_user_id = ?) or
                                     (t_direct_messages.send_user_id = ? and t_direct_messages.receive_user_id = ?))",
-                                    muser.id, muser.id, session[:user_id], session[:user_id], muser.id)
+                                    muser.id, muser.id, params[:user_id], params[:user_id], muser.id)
       @direct_msgcounts.push( @direct_count.size +  @thread_count.size)
     end
     @all_unread_count = 0
