@@ -35,12 +35,12 @@ class AllUnreadController < ApplicationController
 
     @tmp_user_threadids=[]
     @t_user_threadids = Array.new
-    @temp_user_channelids.each do |u_channel|
+    @temp_user_threadids.each do |u_channel|
         unless u_channel.unread_thread_message.nil?
             @tmp_user_threadids << u_channel.unread_thread_message.split(",") unless u_channel.unread_thread_message.nil?
         end
     end
-    @t_user_threadids = @tmp_user_threadids.flatten
+    @t_user_threadids = @temp_user_threadids.flatten
 
     @t_group_threads = TGroupThread.select("t_group_threads.id, t_group_threads.groupthreadmsg, t_group_threads.t_group_message_id, t_group_threads.created_at, m_users.name,
         (select m_channel_id from t_group_messages where t_group_threads.t_group_message_id = t_group_messages.id)")

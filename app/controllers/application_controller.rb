@@ -276,7 +276,7 @@ class ApplicationController < ActionController::API
                                     INNER JOIN m_channels ON m_channels.id = t_user_channels.channelid")
                                 .where("m_users.member_status = true and m_channels.m_workspace_id = ? and m_channels.id = ?",
                                 params[:workspace_id], params[:id])
-    TUserChannel.where(channelid: params[:id], userid: params[:user_id]).update_all(message_count: 0, unread_channel_message: nil)
+    TUserChannel.where(channelid: params[:id], userid: params[:user_id]).update_all(message_count: 0, unread_channel_message: nil, unread_thread_message: nil)
     @t_group_messages = TGroupMessage.select("m_user_id,name, groupmsg, t_group_messages.id as id, t_group_messages.created_at as created_at,
                                             (select count(*) from t_group_threads where t_group_threads.t_group_message_id = t_group_messages.id) as count ")
                                       .joins("INNER JOIN m_users ON m_users.id = t_group_messages.m_user_id")
@@ -306,7 +306,7 @@ class ApplicationController < ActionController::API
                                     INNER JOIN m_channels ON m_channels.id = t_user_channels.channelid")
                                 .where("m_users.member_status = true and m_channels.m_workspace_id = ? and m_channels.id = ?",
                                 params[:workspace_id], params[:s_channel_id])
-    TUserChannel.where(channelid: params[:s_channel_id], userid: params[:user_id]).update_all(message_count: 0, unread_thread_message: nil)
+    # TUserChannel.where(channelid: params[:s_channel_id], userid: params[:user_id]).update_all(message_count: 0, unread_thread_message: nil)
     @t_group_message = TGroupMessage.find_by(id: params[:s_group_message_id])
     @send_user = MUser.find_by(id: @t_group_message.m_user_id)
     @t_group_threads = TGroupThread.select("t_group_threads.m_user_id,name, groupthreadmsg, t_group_threads.id as id, t_group_threads.created_at  as created_at")
