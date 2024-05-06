@@ -13,7 +13,7 @@ class AllUnreadController < ApplicationController
         .joins("INNER JOIN t_direct_messages ON t_direct_messages.id = t_direct_threads.t_direct_message_id
             INNER JOIN m_users ON m_users.id = t_direct_threads.m_user_id")
         .where("t_direct_messages.id=t_direct_threads.t_direct_message_id and t_direct_threads.read_status=false and t_direct_threads.m_user_id=m_users.id 
-            and t_direct_threads.m_user_id <> ?",params[:user_id])
+            and t_direct_threads.m_user_id = ?",params[:user_id])
 
     #Select unread group messages from mysql database        
     @temp_user_channelids=TUserChannel.select("unread_channel_message").where("message_count > 0 and userid=?",params[:user_id])
