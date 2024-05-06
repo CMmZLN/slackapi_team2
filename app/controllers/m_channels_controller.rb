@@ -33,6 +33,7 @@ class MChannelsController < ApplicationController
           @t_user_channel = TUserChannel.new
           @t_user_channel.message_count = 0
           @t_user_channel.unread_channel_message = 0
+          @t_user_channel.unread_thread_message = 0
           @t_user_channel.created_admin = 1
           @t_user_channel.userid =params[:m_channel][:user_id]
           @t_user_channel.channelid = @m_channel.id
@@ -91,6 +92,7 @@ class MChannelsController < ApplicationController
      @t_user_channel = TUserChannel.new
      @t_user_channel.message_count = 0
      @t_user_channel.unread_channel_message = 0
+     @t_user_channel.unread_thread_message = 0
      @t_user_channel.created_admin = 0
      @t_user_channel.userid = params[:userid]
      @t_user_channel.channelid = params[:s_channel_id]

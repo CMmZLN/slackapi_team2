@@ -31,6 +31,17 @@ class AllUnreadController < ApplicationController
     .joins("INNER JOIN m_users ON m_users.id = t_group_messages.m_user_id
     INNER JOIN m_channels ON t_group_messages.m_channel_id=m_channels.id")
 
+    @temp_user_threadids=TUserChannel.select("unread_thread_message").where("message_count > 0 and userid=?",params[:user_id])
+
+    @tmp_user_threadids=[]
+    @t_user_threadids = Array.new
+    @temp_user_channelids.each do |u_channel|
+        unless u_channel.unread_thread_message.nil?
+            @tmp_user_threadids << u_channel.unread_thread_message.split(",") unless u_channel.unread_thread_message.nil?
+        end
+    end
+    @t_user_threadids = @tmp_user_threadids.flatten
+
     @t_group_threads = TGroupThread.select("t_group_threads.id, t_group_threads.groupthreadmsg, t_group_threads.t_group_message_id, t_group_threads.created_at, m_users.name,
         (select m_channel_id from t_group_messages where t_group_threads.t_group_message_id = t_group_messages.id)")
         .joins("INNER JOIN t_group_messages ON t_group_messages.id = t_group_threads.t_group_message_id
@@ -40,6 +51,7 @@ class AllUnreadController < ApplicationController
       t_direct_messages: @t_direct_messages,
       t_direct_threads: @t_direct_threads,
       t_user_channelids: @t_user_channelids,
+      t_user_threadids: @t_user_threadids,
       t_group_messages: @t_group_messages,
       t_group_threads: @t_group_threads
     }

@@ -127,10 +127,10 @@ def deletemsg
         u_channel.message_count =  u_channel.message_count + 1
         
         temp_msgid = ""
-        unless u_channel.unread_channel_message.nil?
-          arr_msgid = u_channel.unread_channel_message.split(",")
+        unless u_channel.unread_thread_message.nil?
+          arr_msgid = u_channel.unread_thread_message.split(",")
           if !arr_msgid.include? params[:s_group_message_id].to_s
-              u_channel.unread_channel_message.split(",").each do |u_message|
+              u_channel.unread_thread_message.split(",").each do |u_message|
                 temp_msgid += u_message
                 temp_msgid += ","
               end
@@ -138,9 +138,9 @@ def deletemsg
           end
         end
         temp_msgid += params[:s_group_message_id].to_s
-        u_channel.unread_channel_message = temp_msgid
+        u_channel.unread_thread_message = temp_msgid
         # temp_msgid += params[:s_group_message_id].to_s 
-        TUserChannel.where(id: u_channel.id).update_all(message_count: u_channel.message_count, unread_channel_message: u_channel.unread_channel_message )
+        TUserChannel.where(id: u_channel.id).update_all(message_count: u_channel.message_count, unread_thread_message: u_channel.unread_thread_message )
       end
     end
 
