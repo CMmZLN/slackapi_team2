@@ -220,8 +220,8 @@ class ApplicationController < ActionController::API
   def retrieve_direct_message
       TDirectMessage.where(send_user_id: params[:id], receive_user_id: params[:user_id], read_status: false).update_all(read_status: true)
       TDirectThread.joins("INNER JOIN t_direct_messages ON t_direct_messages.id = t_direct_threads.t_direct_message_id").where(
-        "(t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? ) or (t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? )", params[:user_id],  params[:id],  params[:id], params[:user_id]
-      ).where.not(m_user_id: params[:user_id], read_status: true).update_all(read_status: true)
+        "(t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? ) or (t_direct_messages.receive_user_id = ? and t_direct_messages.send_user_id = ? )", params[:user_id],  params[:id],  params[:user_id], params[:id]
+      ).where.not(m_user_id: params[:id], read_status: true).update_all(read_status: true)
       @s_user = MUser.find_by(id: params[:id])
       @t_direct_messages = TDirectMessage.select("send_user_id,name, directmsg, t_direct_messages.id as id, t_direct_messages.created_at  as created_at,
                                             (select count(*) from t_direct_threads where t_direct_threads.t_direct_message_id = t_direct_messages.id) as count")
