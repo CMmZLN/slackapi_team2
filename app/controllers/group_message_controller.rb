@@ -137,7 +137,7 @@ def deletemsg
             # u_channel.unread_channel_message = temp_msgid
           end
         end
-        temp_msgid += params[:s_group_message_id].to_s
+        temp_msgid += @t_group_thread.id.to_s
         u_channel.unread_thread_message = temp_msgid
         # temp_msgid += params[:s_group_message_id].to_s 
         TUserChannel.where(id: u_channel.id).update_all(message_count: u_channel.message_count, unread_thread_message: u_channel.unread_thread_message )
