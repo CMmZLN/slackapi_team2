@@ -70,9 +70,9 @@ class SessionsController < ApplicationController
 
   def memberStatus
     unless params[:user_id].nil?
-      mUser= MUser.find_by(id: params[:user_id]);
-      memberStatus = mUser.member_status;
-      render json: {"member_status": member_status}
+      @mUser= MUser.find_by(id: params[:user_id]);
+      @memberStatus = @mUser.member_status;
+      render json: {"member_status": @member_status}
     end
 
   end
