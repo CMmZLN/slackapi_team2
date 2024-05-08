@@ -24,7 +24,7 @@ class ThreadController < ApplicationController
                                     .where("t_group_threads.m_user_id= ?",params[:user_id]).order(created_at: :asc)
     
     #Select group thread messages from mysql database                                 
-    @t_group_threads = TGroupThread.select("m_users.name, t_group_threads.groupthreadmsg, t_group_threads.id, t_group_threads.t_group_message_id,t_group_threads.created_at")
+    @t_group_threads = TGroupThread.select("t_group_threads.m_user_id ,m_users.name, t_group_threads.groupthreadmsg, t_group_threads.id, t_group_threads.t_group_message_id,t_group_threads.created_at")
                                     .joins("INNER JOIN t_group_messages ON t_group_messages.id = t_group_threads.t_group_message_id
                                          INNER JOIN m_users ON t_group_threads.m_user_id = m_users.id ").order(created_at: :asc)
     
