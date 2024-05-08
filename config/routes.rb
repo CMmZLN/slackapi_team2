@@ -97,6 +97,7 @@ Rails.application.routes.draw do
 
     get 'refresh' => 'sessions#refresh'
 
+    get "/member_status" => "sessions#memberStatus"
   
   # Defines the root path route ("/")
   # root "posts#index"

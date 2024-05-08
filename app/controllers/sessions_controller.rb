@@ -66,6 +66,13 @@ class SessionsController < ApplicationController
       MUser.where(id: params[:user_id]).update_all(active_status: true, updated_at: Time.new)
       render json: {successStatus: 1}, status: :ok
     end
-end
+  end
 
+  def memberStatus
+    unless params[:user_id].nil?
+      @memberStatus = MUser.find_by(id: params[:user_id]).member_status;
+      render json: {"member_status": @member_status}
+    end
+
+  end
 end
