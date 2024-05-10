@@ -5,4 +5,5 @@ module CONSTANTS
     ERR_UNAUTHORIZED = '401 Unauthorized'.freeze
     ERR_LOGIN_FAILED = 'login fail'.freeze
     SLACK_APP_LINK = 'http://example2_slack.com/member_invite'
+    
   end
