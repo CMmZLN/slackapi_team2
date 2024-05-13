@@ -29,6 +29,7 @@ class DirectMessagesController < ApplicationController
     @t_direct_thread.directthreadmsg = params[:directthreadmsg]
     @t_direct_thread.t_direct_message_id = params[:t_direct_message_id]
     @t_direct_thread.m_user_id = params[:m_user_id]
+    @t_direct_thread.receive_user_id = params[:receive_user_id]
     @t_direct_thread.read_status = 0
     @t_direct_thread.save
     MUser.where(id: params[:s_user_id]).update_all(remember_digest: "1")
