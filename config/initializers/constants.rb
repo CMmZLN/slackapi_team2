@@ -4,6 +4,6 @@ module CONSTANTS
     # 401 Unauthorized
     ERR_UNAUTHORIZED = '401 Unauthorized'.freeze
     ERR_LOGIN_FAILED = 'login fail'.freeze
-    SLACK_APP_LINK = 'http://example2_slack.com/member_invite'
-    
-  end
+    SLACK_APP_FLUTTER_LINK = 'http://example2_slack.com/member_invite'
+    SLACK_APP_RUBY_LINK = 'https://team2-slack-railsui.onrender.com/confirminvitation'
+end
