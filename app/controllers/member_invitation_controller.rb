@@ -37,7 +37,7 @@ class MemberInvitationController < ApplicationController
         @i_channel = MChannel.find_by(id: params[:channelid])
         @i_workspace = MWorkspace.find_by(id: params[:workspace_id])
 
-        UserMailer.member_invite(@i_user, @i_workspace, @i_channel).deliver_now
+        UserMailer.member_invite(@i_user, @i_workspace, @i_channel, params[:ruby_ui]).deliver_now
         # success_message = true
         # flash[:info] = "Invitation is success."
         # redirect_to home_url
