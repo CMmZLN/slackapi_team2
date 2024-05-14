@@ -84,7 +84,7 @@ class ApplicationController < ActionController::API
       t_group_messages: @t_group_messages,
       t_group_star_msgids:  @t_group_star_msgids,
       u_count: @u_count,
-      userid: @userid.userid,
+      userid: @userid,
       t_group_message_dates: @t_group_message_dates,
       t_group_message_datesize:  @t_group_message_datesize
        }
