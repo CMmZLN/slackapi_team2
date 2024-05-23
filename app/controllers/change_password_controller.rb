@@ -21,6 +21,10 @@ class ChangePasswordController < ApplicationController
       # is_password_blank = true 
       error = "パスワードを入力してください。"
 
+    elsif password.length < 6
+      # is_password_lengtn < 6
+    error = "パスワードが短すぎる。最小は6文字です。"
+      
     elsif password_confirmation == "" || password_confirmation.nil?
       # is_password_confirmation_blank = true
       error = "パスワード確認を入力してください。"
