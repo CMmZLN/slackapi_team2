@@ -49,7 +49,7 @@ en:
               # uniqueness: "はすでに登録されています。"
             email:
               blank: "を入力してください。"
-              invalid: "メールが無効です。"
+              invalid: "が無効です。"
             password:
               blank: "を入力してください。"
               too_short:
